@@ -1,0 +1,10 @@
+= POLY TRADING
+:source-highlighter: coderay
+:doctype: book
+:author: Léo Héritier, Sylvain Reynaud, Cyril Roumégous
+:email: leo.heritier@etu.umontpellier.fr
+:lang: fr
+:sectnums:
+:partnums:
+:imagesdir: assets/images
+:toc:

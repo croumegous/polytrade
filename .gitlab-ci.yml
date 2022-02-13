@@ -1,0 +1,31 @@
+stages:
+  - 📦build
+  - 🦄tmp
+
+image: asciidoctor/docker-asciidoctor:1.16
+
+pdf_preview:
+  stage: 🦄tmp
+  when: manual
+  environment:
+    name: preview/$CI_COMMIT_REF_NAME
+  except:
+    - /master/
+  artifacts:
+    paths:
+      - index.pdf
+    expire_in: 1 week
+  script:
+    - asciidoctor-pdf -a pdf-style=./doc/assets/book.yml -a pdf-fontsdir=./doc/assets/fonts doc/index.adoc
+pdf_publication:
+  stage: 📦build
+  environment:
+    name: production
+  only:
+    - /master/
+  artifacts:
+    paths:
+      - index.pdf
+    expire_in: 1 week
+  script:
+    - asciidoctor-pdf -a pdf-style=./doc/assets/book.yml -a pdf-fontsdir=./doc/assets/fonts doc/index.adoc
