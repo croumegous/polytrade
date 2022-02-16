@@ -1,4 +1,5 @@
 # Binance stream
+
 [link](https://docs.google.com/document/d/1anV0G7cVZiEljeEf_qi-5mF_ErKitjxJkAWrq0JjRXY/edit#heading=h.lx0rfpxnskj5)
 
 ## Overview
@@ -26,7 +27,7 @@ Here is an example on Yahoo finance for the ZEN symbol.
 You will have to implement a smiliar view which will at least be able to show a smoothed line of the current price across time, a candle bar view and an MACD line (the purple line on the screenshot below).
 Recreate and show the order book
 
-An order book contains a list of all pending orders on the market. Let say there is two sellers that sells 1 BTC at $50.000 and a seller that sells a BTC at $49.000, there will be only two informations in the order book: 2 BTC available at $50.000 and one BTC at $49.000. It allows you how much a cryptocurrency is available at a given price.
+An order book contains a list of all pending orders on the market. Let say there is 2 sellers that sells 1 BTC at $50.000 and 1 seller that sells 1 BTC at $49.000, there will be only two informations in the order book: 2 BTC available at $50.000 and one BTC at $49.000. It allows you how much a cryptocurrency is available at a given price.
 
 You will need to provide a reactive view of the order book.
 Simulate fake trades based on the order book
