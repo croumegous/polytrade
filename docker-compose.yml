@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  front:
+    image: TODO
+    ports:
+      - 80:80
+    volumes:
+      - ./assets/config.js:/usr/share/nginx/html/assets/config.js
+    environment:
+      NODE_ENV: production
+      PORT: 80
+      HOST: http://localhost
+      API_HOST: http://localhost:81
+    networks:
+      - frontend
+  api:
+    image: TODO
+    ports:
+      - 81:80
+    networks:
+      - frontend
+      - backend
