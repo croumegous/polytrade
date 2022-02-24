@@ -12,9 +12,10 @@ import scala.concurrent.Future
 import com.github.andyglow.websocket._
 
 object BinanceAPI {
-  def main(args: Array[String]): Unit = {
+  val baseUrl = "wss://stream.binance.com:9443/ws/"
+  def wsClient(url: String): Unit = {
 
-    val cli = WebsocketClient[String]("wss://stream.binance.com:9443/ws/btcusdt@depth20") { case str =>
+    val cli = WebsocketClient[String](f"$baseUrl%s$url%s") { case str =>
       println(str)
     }
 
