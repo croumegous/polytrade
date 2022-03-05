@@ -18,3 +18,12 @@ The actual stack is using:
 - [ViteJS](https://vite.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [MUI](https://mui.com/)
+
+
+## Websocket
+
+The default websocket server is `ws://localhost:8080`.
+
+For testing purposes, use a simple echo server : https://hub.docker.com/r/jmalloc/echo-server
+
+To test this, run: `docker run -d -p 8080:8080 jmalloc/echo-server`

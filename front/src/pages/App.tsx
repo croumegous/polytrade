@@ -1,5 +1,8 @@
 import Button from '@mui/material/Button';
+import { WebSocketDemo } from './wsDemo';
 
 export default function App() {
-  return <Button variant="contained">Hello World</Button>;
+  return <>
+    <WebSocketDemo />
+  </>;
 }
