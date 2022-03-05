@@ -1,7 +1,10 @@
 stages:
   - 📦build
   - 🦄tmp
-
+  - static_tests
+  - build
+  - dynamic_tests
+  - release
 image: asciidoctor/docker-asciidoctor:1.16
 
 pdf_preview:
@@ -29,3 +32,21 @@ pdf_publication:
     expire_in: 1 week
   script:
     - asciidoctor-pdf -a pdf-style=./doc/assets/book.yml -a pdf-fontsdir=./doc/assets/fonts doc/index.adoc
+
+# Doc : https://r2devops.io/jobs/
+include:
+  - remote: https://jobs.r2devops.io/gitleaks.yml
+  # - remote: https://jobs.r2devops.io/sls_scan.yml
+  - remote: https://jobs.r2devops.io/docker_build.yml
+  # - remote: https://jobs.r2devops.io/trivy_image.yml
+#frontend
+docker_build:
+  variables:
+    DOCKER_CONTEXT_PATH: "./front"
+    DOCKER_USE_CACHE: "true"
+
+docker_build_backend:
+  extends: docker_build
+  variables:
+    DOCKER_CONTEXT_PATH: "./backend/api"
+    DOCKER_USE_CACHE: "true"
