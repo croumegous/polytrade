@@ -1,7 +1,7 @@
-package binance
+package routes.binance
 
-import akka.http.scaladsl.model.*
-import akka.http.scaladsl.server.Directives.*
+import akka.http.scaladsl.model._
+import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.actor.typed.scaladsl.AskPattern._
 
