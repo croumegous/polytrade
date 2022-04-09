@@ -1,4 +1,4 @@
-FROM mozilla/sbt as build
+FROM hseeberger/scala-sbt:17.0.2_1.6.2_3.1.1 as build
 WORKDIR /usr/src/app
 
 ARG SBT_VERSION=1.6.2
@@ -6,12 +6,13 @@ ARG OPENJDK_TAG=17.0.1
 
 COPY . .
 
-RUN sbt compile && sbt package && mv target/scala-*/*.jar ./scala.jar
+RUN sbt compile clean package
+# RUN mv target/scala-*/*.jar ./scala.jar
 
-FROM openjdk:17.0.1-slim
+FROM openjdk:17.0.1-slim as production
 WORKDIR /usr/src/app
 
-COPY --from=build /usr/src/app/scala.jar /usr/src/app/scala.jar
+COPY --from=build /usr/src/app/target/scala-*/*.jar  /usr/src/app/scala.jar
 
 # https://github.com/docker-library/openjdk/issues/234#issuecomment-610658046
 RUN addgroup --system --gid 1001 appuser && \
