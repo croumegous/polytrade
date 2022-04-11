@@ -19,15 +19,27 @@ case class TokenResponse(
 )
 
 case class UserData(
-      token: String,
-      email: String,
-      position: Map[String, Double]
-  )
+    token: String,
+    email: String,
+    balance: Map[String, Double]
+)
 
+case class UserBalance(
+    email: String,
+    balance: Map[String, Double]
+)
+
+case class MarketOrder(
+    buying: Boolean,
+    asset: String,
+    amount: Double
+)
 
 trait JsonSerializer extends SprayJsonSupport with DefaultJsonProtocol {
   implicit val createUserRequestFormat = jsonFormat3(CreateUserRequest)
   implicit val loginRequestFormat = jsonFormat2(LoginRequest)
   implicit val tokenResponseFormat = jsonFormat1(TokenResponse)
-  implicit val UserDataFormat = jsonFormat3(UserData)
+  implicit val userDataFormat = jsonFormat3(UserData)
+  implicit val marketOrderFormat = jsonFormat3(MarketOrder)
+  implicit val userBalanceFormat = jsonFormat2(UserBalance)
 }

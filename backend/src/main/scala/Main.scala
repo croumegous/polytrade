@@ -14,7 +14,9 @@ import scala.util.Success
 // import our package
 import routes.binance.Binance
 import routes.authentication.UserManagementRoutes
-import services.UserManagementService
+import routes.trading.TradingRoutes
+import services.{UserManagementService, TradingService}
+
 
 // @main def httpserver: Unit =
 object HttpApi {
@@ -23,11 +25,13 @@ object HttpApi {
     implicit val actorSystem = ActorSystem(Behaviors.empty, "akka-http")
 
     val userMananagementRoutes = new UserManagementRoutes(new UserManagementService)
+    val tradingRoutes = new TradingRoutes(new TradingService)
 
     /** Define routes to listen
       */
     val routes =
         userMananagementRoutes.routes ~
+        tradingRoutes.routes ~
         Binance.routes ~
         path("") {
           get {

@@ -41,7 +41,7 @@ trait JWTAuthService extends Directives {
           case claims if isTokenExpired(claims) =>
             complete(StatusCodes.Unauthorized -> "Session expired.")
           case claims if claims.nonEmpty =>
-            provide(claims) // todo check user exists
+            provide(claims)
           case _ => complete(StatusCodes.Unauthorized, "Invalid token")
         }
       case _ => complete(StatusCodes.Unauthorized)
