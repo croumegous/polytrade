@@ -7,6 +7,8 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._ // to create http roles
 
+import ch.megard.akka.http.cors.scaladsl.CorsDirectives._
+
 // utils
 import scala.util.Failure
 import scala.util.Success
@@ -29,17 +31,18 @@ object HttpApi {
 
     /** Define routes to listen
       */
-    val routes =
-        userMananagementRoutes.routes ~
-        tradingRoutes.routes ~
-        Binance.routes ~
-        path("") {
-          get {
-            complete(
-              HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Root path</h1>")
+    val routes = cors() {
+      userMananagementRoutes.routes ~
+      tradingRoutes.routes ~
+      Binance.routes ~
+      path("") {
+        get {
+          complete(
+            HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Root path</h1>")
             )
           }
         }
+      }
 
     /** Start the server binding routes to listen
       */
