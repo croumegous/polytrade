@@ -23,6 +23,6 @@ docker_build_backend:
   stage: build
   extends: docker_build
   variables:
-    DOCKER_CONTEXT_PATH: './backend/api/'
+    DOCKER_CONTEXT_PATH: './backend/'
     DOCKER_USE_CACHE: 'true'
     DOCKERFILE_PATH: './Dockerfile'
