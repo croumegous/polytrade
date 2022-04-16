@@ -2,26 +2,28 @@ version: "3.8"
 
 services:
   front:
-    image: TODO
+    container_name: poly-trade-front
+    build: ./front/
     ports:
       - 80:80
-    volumes:
-      - ./assets/config.js:/usr/share/nginx/html/assets/config.js
     environment:
       NODE_ENV: production
-      PORT: 80
-      HOST: http://localhost
-      API_HOST: http://localhost:81
     networks:
       - frontend
   api:
-    image: TODO
+    container_name: poly-trade-api
+    build: ./backend/
     ports:
       - 81:80
     networks:
       - frontend
       - backend
+    environment:
+      HTTP_HOST: http://127.0.0.1
+      HTTP_PORT: 80
+      DATABASE_URL: mongodb://root:root@poly-trade-mongodb:27017/polytrade
   mongodb:
+    container_name: poly-trade-mongodb
     image: mongo
     restart: always
     ports:

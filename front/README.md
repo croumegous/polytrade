@@ -19,6 +19,10 @@ The actual stack is using:
 - [TypeScript](https://www.typescriptlang.org/)
 - [MUI](https://mui.com/)
 
+### Environment variables
+
+The environment variables used with Docker are set in the `.env.production` file.
+
 ## Websocket
 
 The default websocket server is `ws://localhost:8080`.
