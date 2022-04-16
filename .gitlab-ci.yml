@@ -6,7 +6,7 @@ stages:
 
 # Doc : https://r2devops.io/jobs/
 include:
-  - remote: https://jobs.r2devops.io/gitleaks.yml
+  #- remote: https://jobs.r2devops.io/gitleaks.yml
   # - remote: https://jobs.r2devops.io/sls_scan.yml
   - remote: https://jobs.r2devops.io/docker_build.yml
   # - remote: https://jobs.r2devops.io/trivy_image.yml
