@@ -16,14 +16,13 @@ import routes.{CreateUserRequest, LoginRequest, UserData}
 import authentication.JWTAuthService
 import scala.concurrent.Await
 import db.User
+import utils.Configuration
 
 
-object UserRepository {
+object UserRepository extends Configuration{
   val driver = AsyncDriver()
-  val mongoUri: String = scala.util.Properties
-    .envOrElse("DATABASE_URL", "mongodb://localhost:27017/polytrade")
   import ExecutionContext.Implicits.global
-  val parsedUri = MongoConnection.fromString(mongoUri)
+  val parsedUri = MongoConnection.fromString(databaseUrl)
   val futureConnection = parsedUri.flatMap(driver.connect(_))
   def db: Future[DB] = futureConnection.flatMap(_.database("polytrade"))
   def userCollection = db.map(_.collection("user"))
