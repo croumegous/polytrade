@@ -5,7 +5,7 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.Directives
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
-import authentication.JWTAuthService
+import services.JWTAuthService
 import routes.JsonSerializer
 import routes.{MarketOrder}
 import scala.util.{Right, Left, Either}

@@ -13,7 +13,6 @@ import com.github.t3hnar.bcrypt._
 import scala.concurrent._
 import scala.concurrent.duration._
 import routes.{CreateUserRequest, LoginRequest, UserData}
-import authentication.JWTAuthService
 import scala.concurrent.Await
 import db.UserRepository.{getUserByEmail, checkDuplicateUserByEmail, createUser}
 import db.User

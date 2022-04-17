@@ -6,23 +6,45 @@ import akka.http.scaladsl.server.Route
 import akka.actor.typed.scaladsl.AskPattern._
 
 import scala.concurrent.Future
+import akka.stream.scaladsl._
+import akka.actor._
+import akka.http.scaladsl.model.ws._
+import akka.NotUsed
+import akka.stream.{OverflowStrategy, ActorMaterializer}
 
+import services.BinanceFlow
 object Binance {
+
+  val candleStickFlow: Flow[Message, Message, NotUsed] =
+    Flow[Message]
+      .mapAsync(1) {
+        case TextMessage.Strict(text) =>
+          Future.successful(text)
+        case _ => Future.failed(new Exception("Unexpected message"))
+      }
+      .via(Flow.fromSinkAndSource(Sink.ignore, BinanceFlow.priceSource))
+      .map[Message](string => TextMessage(string))
+
+  val orderBookFlow: Flow[Message, Message, NotUsed] =
+    Flow[Message]
+      .mapAsync(1) {
+        case TextMessage.Strict(text) => Future.successful(text)
+        case _ => Future.failed(new Exception("Unexpected message"))
+      }
+      .via(Flow.fromSinkAndSource(Sink.ignore, BinanceFlow.orderbookSource))
+      .map[Message](string => TextMessage(string))
+
   val routes: Route =
-  path("binance") {
-    get {
-        complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Binance API there</h1>"))
+    pathPrefix("ws") {
+      path("candlestick") {
+        get {
+          handleWebSocketMessages(candleStickFlow)
+        }
+      } ~
+        path("orderbook") {
+          get {
+            handleWebSocketMessages(orderBookFlow)
+          }
+        }
     }
-  }
-
-  // val baseUrl = "wss://stream.binance.com:9443/ws/"
-
-  // def wsClient(url: String): Unit = {
-
-  //   val cli = WebsocketClient[String](f"$baseUrl%s$url%s") { case str =>
-  //     println(str)
-  //   }
-
-  //   val ws = cli.open()
-  // }
 }
