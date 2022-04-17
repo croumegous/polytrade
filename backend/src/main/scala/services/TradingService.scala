@@ -22,7 +22,6 @@ import routes.{
   MarketOrder,
   UserBalance
 }
-import authentication.JWTAuthService
 import scala.concurrent.Await
 import db.UserRepository.{getUserByEmail, updateUser}
 import db.User
@@ -49,7 +48,7 @@ class TradingService extends JWTAuthService with JsonSerializer {
             user.balance.get("usd") match {
               case Some(usdBalance) =>
                 val priceInUsd =
-                  order.amount * 41000 // use getBtcPrice function to get real price
+                  order.amount * getMarketPrice(order.asset)
                 if (usdBalance >= priceInUsd) {
                   val newUsdBalance = usdBalance - priceInUsd
                   var newAssetBalance: Double =
@@ -74,7 +73,7 @@ class TradingService extends JWTAuthService with JsonSerializer {
               case Some(assetBalance) =>
                 if (assetBalance >= order.amount) {
                   val priceInUsd: Double =
-                    order.amount * 41000 // use getBtcPrice function to get real price
+                    order.amount * getMarketPrice(order.asset)
                   val newUsdBalance =
                     user.balance.get("usd").getOrElse(0.0) + priceInUsd
                   val newAssetBalance = assetBalance - order.amount
@@ -97,6 +96,24 @@ class TradingService extends JWTAuthService with JsonSerializer {
       case false =>
         complete(StatusCodes.BadRequest, "Asset not available")
     }
+  }
+
+  def getMarketPrice(asset: String): Double = {
+    val url =
+      "https://api.binance.com/api/v3/ticker/price?symbol=" + asset.toUpperCase + "USDT"
+    val response = requests.get(url)
+
+    val responseMap = response.text
+      .substring(1, response.text.length - 1)
+      .split(",")
+      .map(_.split(":"))
+      .map { case Array(k, v) =>
+        (k.substring(1, k.length - 1), v.substring(1, v.length - 1))
+      }
+      .toMap
+
+    responseMap("price").toDouble
+
   }
 
 }

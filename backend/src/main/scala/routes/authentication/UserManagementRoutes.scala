@@ -6,7 +6,7 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.Directives
 import services.UserManagementService
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
-import authentication.JWTAuthService
+import services.JWTAuthService
 import routes.JsonSerializer
 import routes.{CreateUserRequest, LoginRequest, TokenResponse, UserData}
 import scala.util.{Failure, Try, Success, Right, Left, Either}

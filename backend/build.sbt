@@ -20,6 +20,8 @@ lazy val root = project
       "io.circe" %% "circe-generic" % "0.14.1",
       "de.heikoseeberger" %% "akka-http-play-json" % "1.20.0",
       "com.github.jwt-scala" %% "jwt-json4s-native" % "9.0.5",
-      "com.github.t3hnar" %% "scala-bcrypt" % "4.3.0"
+      "com.github.t3hnar" %% "scala-bcrypt" % "4.3.0",
+      "com.lihaoyi" %% "requests" % "0.7.0",
+      "ch.megard" %% "akka-http-cors" % "1.1.3",
     )
   )
