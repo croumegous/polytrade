@@ -2,12 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "scripthost"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "scripthost"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -19,29 +14,16 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "sourceMap": true,
-    "types": [
-      "vite/client",
-      "node"
-    ],
+    "types": ["vite/client", "node"],
     "baseUrl": ".",
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@env/*": [
-        "src/env/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ],
-      "@/*": [
-        "src/*"
-      ],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@env/*": ["src/env/*"],
+      "@assets/*": ["src/assets/*"],
+      "@/*": ["src/*"]
     }
   },
   "include": [
