@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^8.14.0",
+    "phantomjs-prebuilt": "^2.1.16"
+  }
+}

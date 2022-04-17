@@ -1,7 +1,7 @@
-default: hello
+default: setup
 
-hello:
-	@echo "Hello World"
+setup:
+	$(MAKE) -C doc setup
 
-pdf:
-	asciidoctor-pdf -a pdf-style=./doc/assets/book.yml -a pdf-fontsdir=./doc/assets/fonts doc/index.adoc
+build:
+	$(MAKE) -C doc build
