@@ -1,0 +1,56 @@
+font:
+  catalog:
+    Montserrat:
+      normal: Montserrat-Regular.ttf
+      bold: Montserrat-SemiBold.ttf
+      light: Montserrat-Light.ttf
+      italic: Montserrat-LightItalic.ttf
+      bold_italic: Montserrat-SemiBoldItalic.ttf
+    SourceCode:
+      normal: SourceCodePro-Regular.ttf
+      bold: SourceCodePro-Semibold.ttf
+      italic: SourceCodePro-Light.ttf
+conum:
+  font_family: Montserrat
+code:
+  font_family: SourceCode
+base:
+  align: left
+  font_family: Montserrat
+page:
+  margin: [75, 36, 75, 36]
+table:
+  head:
+    background-color: #333333
+    font-color: #fff
+image:
+  align: center
+header:
+  height: 1in
+  line_height: 1
+  padding: [20, 0, 20, 0]
+  recto:
+    left:
+      content: image:./images/logo-polytech.png[height=10]
+    center:
+      content: '{document-title}'
+    right:
+      content: image:./images/logo-do.jpg[height=10]
+  verso:
+    left:
+      content: image:./images/logo-polytech.png[height=10]
+    center:
+      content: '{document-title}'
+    right:
+      content: image:./images/logo-do.jpg[height=10]
+footer:
+  height: 0.75in
+  border-style: dashed
+  border-color: #fff
+  line-height: 1
+  recto:
+    right:
+      content: '{section-or-chapter-title} | *{page-number}*'
+  verso:
+    left:
+      content: '*{page-number}* | {chapter-title}'

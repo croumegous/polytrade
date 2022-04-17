@@ -5,7 +5,6 @@ stages:
   - release
   - deploy
 
-
 # Doc : https://r2devops.io/jobs/
 include:
   #- remote: https://jobs.r2devops.io/gitleaks.yml
@@ -30,6 +29,22 @@ docker_build_backend:
     DOCKER_USE_CACHE: 'true'
     DOCKERFILE_PATH: './Dockerfile'
     TAG_CREATE_LATEST: 'true'
+
+# documentation
+build:
+  image: debian:bullseye-slim
+  stage: build
+  environment:
+    name: production
+  artifacts:
+    paths:
+      - doc/index.pdf
+    expire_in: 1 week
+  script:
+    - apt update
+    - apt install -y build-essential
+    - make setup
+    - make build
 
 deploy_dev:
   stage: deploy
