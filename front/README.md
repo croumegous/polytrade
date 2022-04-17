@@ -19,6 +19,9 @@ The actual stack is using:
 - [TypeScript](https://www.typescriptlang.org/)
 - [MUI](https://mui.com/)
 
+### Environment variables
+
+The environment variables used with Docker are set in the `.env.production` file.
 
 ## Websocket
 
@@ -27,3 +30,8 @@ The default websocket server is `ws://localhost:8080`.
 For testing purposes, use a simple echo server : https://hub.docker.com/r/jmalloc/echo-server
 
 To test this, run: `docker run -d -p 8080:8080 jmalloc/echo-server`
+
+## Trading chart
+
+We use tradingview charting library to display charts.
+Docs here: https://www.tradingview.com/docs/chart-concepts/

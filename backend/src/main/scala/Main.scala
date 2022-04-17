@@ -8,6 +8,8 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._ // to create http roles
 
+import ch.megard.akka.http.cors.scaladsl.CorsDirectives._
+
 // utils
 import scala.util.Failure
 import scala.util.Success

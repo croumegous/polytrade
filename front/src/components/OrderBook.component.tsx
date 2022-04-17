@@ -1,30 +1,32 @@
-
 import { OrderBook } from "@lab49/react-order-book";
+import Box from "@mui/system/Box";
 import { useState } from "react";
 
+import { environment } from "../env/environment";
+
 interface Book {
-    bids: [string, string][];
-    asks: [string, string][];
+  bids: [string, string][];
+  asks: [string, string][];
 }
 
 export const OrderBookPanel = () => {
   const [book, setBook] = useState<Book | null>(null);
-  var binanceSocket = new WebSocket(
-    "wss://stream.binance.com:9443/ws/btcusdt@depth20"
-  );
+  const binanceSocket = new WebSocket(environment.api.orderBook);
 
   binanceSocket.onmessage = function (event) {
-    var message = JSON.parse(event.data);
-
-    // var candlestick = message;
-
-    console.log(message);
-
-    setBook({ asks: message.asks, bids: message.bids });
+    const message = JSON.parse(event.data);
+    setBook(message as Book);
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        color: "rgba(255, 255, 255, 0.6)",
+        fontSize: "0.6rem",
+      }}
+    >
       <style
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
@@ -35,7 +37,7 @@ export const OrderBookPanel = () => {
                 font-family: -apple-system, BlinkMacSystemFont, sans-serif;
                 font-size: 13px;
                 font-variant-numeric: tabular-nums;
-                padding: 50px 0;
+                height: 100%;
               }
               .MakeItNiceAgain__side-header {
                 font-weight: 700;
@@ -102,15 +104,15 @@ export const OrderBookPanel = () => {
 
       {book !== null && (
         <OrderBook
-          book={{ bids: book.bids, asks: book.asks }}
+          book={book}
           // applyBackgroundColor
           // fullOpacity
           interpolateColor={(color: any) => color}
-          listLength={11}
+          listLength={9}
           stylePrefix="MakeItNiceAgain"
           showSpread={false}
         />
       )}
-    </>
+    </Box>
   );
 };

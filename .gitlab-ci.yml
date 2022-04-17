@@ -19,6 +19,7 @@ docker_build:
     DOCKER_CONTEXT_PATH: './front/'
     DOCKER_USE_CACHE: 'true'
     DOCKERFILE_PATH: './Dockerfile'
+    TAG_CREATE_LATEST: 'true'
 
 # backend
 docker_build_backend:
@@ -28,6 +29,7 @@ docker_build_backend:
     DOCKER_CONTEXT_PATH: './backend/'
     DOCKER_USE_CACHE: 'true'
     DOCKERFILE_PATH: './Dockerfile'
+    TAG_CREATE_LATEST: 'true'
 
 deploy_dev:
   stage: deploy
