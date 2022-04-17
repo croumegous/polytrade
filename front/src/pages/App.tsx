@@ -1,24 +1,19 @@
-import { Button, Grid, Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 
+import { User } from "@/types/user.type";
+
 import { AuthForm } from "../components/auth/AuthForm.component";
 import { Chart } from "../components/Chart.component";
 import { OrderBookPanel } from "../components/OrderBook.component";
+import { ResumePNL } from "../components/ResumePNL.component";
 import { TradePanel } from "../components/Tradepanel.component";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#151825",
-  ...theme.typography.body2,
-  padding: theme.spacing(12),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 export const App = () => {
   const [price, setPrice] = useState(0);
-  const [user, setUser] = useState(null);
+  const [user, setUser]: [user: User, setUser: any] = useState();
 
   return (
     <Grid
@@ -38,10 +33,10 @@ export const App = () => {
       {user != null ? (
         <Grid container sx={{ height: "20vh" }}>
           <Grid item sx={{ width: "100%", height: "100%" }} xs={9}>
-            <TradePanel price={price} />
+            <TradePanel price={price} setUser={setUser} user={user} />
           </Grid>
           <Grid item sx={{ width: "100%", height: "100%" }} xs={3}>
-            PNL
+            <ResumePNL user={user} />
           </Grid>
         </Grid>
       ) : (

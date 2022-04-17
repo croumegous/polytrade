@@ -1,6 +1,6 @@
 import { OrderBook } from "@lab49/react-order-book";
 import Box from "@mui/system/Box";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { environment } from "../env/environment";
 
@@ -11,12 +11,15 @@ interface Book {
 
 export const OrderBookPanel = () => {
   const [book, setBook] = useState<Book | null>(null);
+  useEffect(() => {
+  
   const binanceSocket = new WebSocket(environment.api.orderBook);
 
   binanceSocket.onmessage = function (event) {
     const message = JSON.parse(event.data);
     setBook(message as Book);
   };
+}, []);
 
   return (
     <Box
