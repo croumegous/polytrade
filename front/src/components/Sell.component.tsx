@@ -23,15 +23,17 @@ export const SellInterface = ({
     mode: "onSubmit",
     reValidateMode: "onChange",
     defaultValues: {
-      amountUSD: 0.01 * price,
-      amountBTC: 0.01,
+      amountUSD: 0 * price,
+      amountBTC: 0,
     },
   });
 
   const [snackError, setSnackError] = useState(false);
   const [snackSuccess, setSnackSuccess] = useState(false);
 
-  const { response, post, error } = useFetch(environment.api.trade);
+  const { response, post, error } = useFetch(environment.api.trade, {
+    headers: { authorization: `${user.token}` },
+  });
   const onSubmit = async (data: { amountBTC: number }) => {
     const { amountBTC } = data;
     await post("/market", {

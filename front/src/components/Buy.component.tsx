@@ -6,9 +6,9 @@ import useFetch from "use-http";
 import { User } from "@/types/user.type";
 
 import { environment } from "../env/environment";
+import { CustomInput, InputAdornment } from "./input.component";
 import { TradeButton } from "./TradeButton.component";
 import { TradeOrder } from "./Tradepanel.component";
-import { CustomInput, InputAdornment } from "./input.component";
 
 export const BuyInterface = ({
   user,
@@ -31,7 +31,9 @@ export const BuyInterface = ({
   const [snackError, setSnackError] = useState(false);
   const [snackSuccess, setSnackSuccess] = useState(false);
 
-  const { response, post, error } = useFetch(environment.api.trade);
+  const { response, post, error } = useFetch(environment.api.trade, {
+    headers: { authorization: `${user.token}` },
+  });
   const onSubmit = async (data: { amountBTC: number }) => {
     const { amountBTC } = data;
     await post("/market", {

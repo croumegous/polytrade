@@ -6,6 +6,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import NumberFormat from "react-number-format";
 
 import { User } from "../types/user.type";
 
@@ -22,7 +23,7 @@ export const ResumePNL = ({ user }: { user: User }) => {
               sx={{ color: "#fff !important", fontWeight: "bold" }}
               align="right"
             >
-              Value
+              Amount
             </TableCell>
           </TableRow>
         </TableHead>
@@ -41,7 +42,12 @@ export const ResumePNL = ({ user }: { user: User }) => {
             </TableCell>
 
             <TableCell sx={{ color: "#fff !important" }} align="right">
-              {user.balance.btc}
+              <NumberFormat
+                value={user.balance.btc}
+                displayType={"text"}
+                thousandSeparator={true}
+                decimalScale={8}
+              />
             </TableCell>
           </TableRow>
           <TableRow key={"usd"}>
@@ -54,7 +60,13 @@ export const ResumePNL = ({ user }: { user: User }) => {
             </TableCell>
 
             <TableCell sx={{ color: "#fff !important" }} align="right">
-              {user.balance.usd}
+              <NumberFormat
+                value={user.balance.usd}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+                decimalScale={2}
+              />
             </TableCell>
           </TableRow>
         </TableBody>
