@@ -20,8 +20,8 @@ docker_build:
     DOCKER_USE_CACHE: 'true'
     DOCKERFILE_PATH: './Dockerfile'
     TAG_CREATE_LATEST: 'true'
-'
-#' backend
+
+# backend
 docker_build_backend:
   stage: build
   extends: docker_build
