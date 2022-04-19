@@ -5,7 +5,7 @@ services:
     container_name: poly-trade-front
     build: ./front/
     ports:
-      - 80:80
+     - 80:80
     environment:
       NODE_ENV: production
     networks:
@@ -14,14 +14,13 @@ services:
     container_name: poly-trade-api
     build: ./backend/
     ports:
-      - 81:80
+     - 8080:8080
     networks:
       - frontend
       - backend
     environment:
-      HTTP_HOST: http://127.0.0.1
-      HTTP_PORT: 80
-      DATABASE_URL: mongodb://root:root@poly-trade-mongodb:27017/polytrade
+      HTTP_HOST: 0.0.0.0
+      DATABASE_URL: mongodb://poly-trade-mongodb:27017/polytrade
   mongodb:
     container_name: poly-trade-mongodb
     image: mongo
@@ -30,8 +29,6 @@ services:
       - 27017:27017
     environment:
       MONGO_INITDB_DATABASE: polytrade
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - mongodata:/data/db
     networks:
